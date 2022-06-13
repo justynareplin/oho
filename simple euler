@@ -1,0 +1,30 @@
+#include <iostream>
+
+using namespace std;
+
+int main(int argc, char** argv) {
+	double x0,y0,h,f0;
+	int N;
+	
+	cout<<"Enter h:"<<endl;
+	cin>>h;
+	
+	N=int(1.00001/h); //number of steps
+	
+	//initial values
+	x0=0.0;
+	y0=0.0;
+	cout<<"x0= "<<x0<<" ; y0= "<<y0<<endl;
+	
+	for(int i=1;i<=N;i++)
+	{
+		//Simple Euler
+		f0=y0*y0+1.0;
+		x0=x0+h;  //New x0
+		y0=y0+h*f0; //New y0
+		cout<<"x0= "<<x0<<" ; y0= "<<y0<<endl;
+	}
+	
+	system("pause");
+	return 0;	
+}
