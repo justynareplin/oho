@@ -1,0 +1,66 @@
+#include <iostream>
+
+using namespace std;
+
+double f(double y){
+	return y*y+1.0;
+}
+
+int main(int argc, char** argv) {
+	double x0,y0,f0,f1,f2,f3,h;
+	double yMid,fMid;
+	int N;
+	
+	//Read step	
+	cout<<"Enter h:"<<endl;
+	cin>>h;
+
+	//Number of segments
+	N=int(1.00001/h);
+	
+	//Modified Euler
+	cout<<"Modified Euler:"<<endl;
+	x0=0.0;
+	y0=0.0;
+	cout<<"x0= "<<x0<<" ; y0= "<<y0<<endl;
+	for(int i=1;i<=N;i++){
+		f0=f(y0);
+		yMid=y0+(h/2.0)*f0;
+		fMid=f(yMid);
+		y0=y0+h*fMid; //New y0
+		x0=x0+h; //New x0
+		cout<<"x0= "<<x0<<" ; y0= "<<y0<<endl;
+	}
+	cout<<endl;
+		
+	//Improved Euler
+	cout<<"Improved Euler:"<<endl;
+	x0=0.0;
+	y0=0.0;
+	cout<<"x0= "<<x0<<" ; y0= "<<y0<<endl;
+	for(int i=1;i<=N;i++){
+		f0=f(y0);
+		y0=y0+(h/2.0)*(f0+f(y0+h*f0)); //New y0
+		x0=x0+h; //New x0
+		cout<<"x0= "<<x0<<" ; y0= "<<y0<<endl;
+	}
+	cout<<endl;
+		
+	//fourth-order Runge-Kutta
+	cout<<"Fourth-order Runge-Kutta:"<<endl;
+	x0=0.0;
+	y0=0.0;
+	cout<<"x0= "<<x0<<" ; y0= "<<y0<<endl;
+	for(int i=1;i<=N;i++){
+		f0=f(y0);
+		f1=f(y0+(h/2.0)*f0);
+		f2=f(y0+(h/2.0)*f1);
+		f3=f(y0+h*f2);
+		y0=y0+(h/6.0)*(f0+2.0*f1+2.0*f2+f3); //New y0
+		x0=x0+h; //New x0
+		cout<<"x0= "<<x0<<" ; y0= "<<y0<<endl;
+	}
+	cout<<endl;
+		
+	return 0;
+}
